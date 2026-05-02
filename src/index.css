@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Cinzel:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body {
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: 'Noto Serif SC', serif;
+  }
+}
+
+/* ===== 字体工具 ===== */
+.font-cinzel { font-family: 'Cinzel', serif; }
+.font-serif-sc { font-family: 'Noto Serif SC', serif; }
+
+/* ===== 玻璃卡片 ===== */
+.glass {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+}
+.glass-dark {
+  background: rgba(8, 4, 24, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(140, 100, 255, 0.18);
+  border-radius: 20px;
+}
+.glass-btn {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #e8d9ff;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.glass-btn:hover {
+  background: rgba(160, 100, 255, 0.25);
+  border-color: rgba(200, 160, 255, 0.5);
+  box-shadow:
+    0 0 24px rgba(160, 100, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.glass-btn:active { transform: scale(0.97); }
+
+/* 星空背景动画 */
+@keyframes drift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-40px, -20px, 0); }
+}
+
+.starfield-layer {
+  animation: drift 120s linear infinite alternate;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes thinking {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+
+/* ===== 极光层（更柔和、更紫调） ===== */
+@keyframes auroraDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(3vw, 2vh) scale(1.08); }
+  100% { transform: translate(-2vw, -1vh) scale(0.95); }
+}
+
+.aurora-layer {
+  background:
+    radial-gradient(ellipse 70% 40% at 20% 15%, rgba(100, 60, 200, 0.35), transparent 70%),
+    radial-gradient(ellipse 60% 35% at 80% 55%, rgba(60, 120, 220, 0.3), transparent 70%),
+    radial-gradient(ellipse 50% 30% at 45% 85%, rgba(180, 60, 160, 0.2), transparent 70%);
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  animation: auroraDrift 22s ease-in-out infinite alternate;
+}
+.aurora-layer-2 {
+  background:
+    radial-gradient(ellipse 55% 28% at 60% 25%, rgba(124, 109, 250, 0.22), transparent 65%),
+    radial-gradient(ellipse 45% 22% at 25% 75%, rgba(167, 139, 250, 0.18), transparent 65%);
+  filter: blur(90px);
+  animation: auroraDrift 30s ease-in-out infinite alternate-reverse;
+  animation-delay: -8s;
+}
+
+/* 顶部暗角 */
+.vignette {
+  background: radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0, 0, 10, 0.85) 100%);
+}
+
+/* 近星闪烁 */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 0.4; }
+}
+.twinkle-layer {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+/* FluidOrb 呼吸 - 两个频率错位叠加产生"流动呼吸"感 */
+@keyframes orb-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.045); }
+}
+@keyframes orb-breath-slow {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50%      { opacity: 0.7;  transform: scale(1.1); }
+}
+
+/* 状态指示小圆点脉冲 */
+@keyframes dotPulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #a78bfa; }
+  50%      { opacity: 0.5; box-shadow: 0 0 4px #a78bfa; }
+}
+
+/* 螺旋 loader */
+@keyframes spin         { to { transform: rotate(360deg); } }
+@keyframes spin-reverse { to { transform: rotate(-360deg); } }
+
+/* 滚动条美化 */
+.reading-scroll::-webkit-scrollbar { width: 4px; }
+.reading-scroll::-webkit-scrollbar-track { background: transparent; }
+.reading-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+}
+.reading-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(124,109,250,0.35);
+}
